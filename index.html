@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tutorial Interaktif: Positioning CSS (06-latihan)</title>
+  <title>Portfolio illustrasi</title>
   <style>
     * {
       box-sizing: border-box;
@@ -13,762 +13,111 @@
 
     body {
       font-family: system-ui, -apple-system, sans-serif;
-      height: 100vh;
+      background-color: #f8fafc;
+      color: #334155;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      background-color: #0f172a;
-      color: #f1f5f9;
-      overflow: hidden;
     }
 
-    header.app-header {
-      padding: 10px 20px;
-      background: #1e293b;
-      border-bottom: 1px solid #334155;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-shrink: 0;
-    }
-
-    header.app-header h1 {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: #38bdf8;
-    }
-
-    header.app-header p {
-      font-size: 0.8rem;
-      color: #94a3b8;
-    }
-
-    .split-layout {
-      flex: 1;
-      display: flex;
-      height: calc(100vh - 49px);
-    }
-
-    /* Panel Kiri */
-    .editor-panel {
-      width: 50%;
-      border-right: 1px solid #334155;
-      display: flex;
-      flex-direction: column;
-      background: #0f172a;
-    }
-
-    .controls-section {
-      padding: 10px 14px;
-      background: #1e293b;
-      border-bottom: 1px solid #334155;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      max-height: 60%;
-      overflow-y: auto;
-    }
-
-    .section-title {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: #f59e0b;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-top: 4px;
-      margin-bottom: 2px;
-      border-bottom: 1px solid rgba(245, 158, 11, 0.2);
-      padding-bottom: 2px;
-    }
-
-    .control-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.76rem;
-    }
-
-    .control-label {
-      width: 155px;
-      color: #cbd5e1;
-      font-weight: 500;
-      flex-shrink: 0;
-    }
-
-    .control-inputs {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      flex-wrap: wrap;
-      flex: 1;
-    }
-
-    .manual-input {
-      background: #0f172a;
-      border: 1px solid #38bdf8;
-      color: #38bdf8;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.74rem;
-      font-family: monospace;
-      width: 100px;
-      outline: none;
-    }
-
-    .manual-input:focus {
-      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3);
-    }
-
-    .btn-group {
-      display: flex;
-      gap: 4px;
-      flex-wrap: wrap;
-    }
-
-    .btn-group button {
-      background: #334155;
-      color: #94a3b8;
-      border: 1px solid #475569;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.69rem;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .btn-group button:hover {
-      background: #475569;
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: #42b0f5;
       color: #ffffff;
-    }
-
-    .btn-group button.active {
-      background: #0284c7;
-      color: #ffffff;
-      border-color: #38bdf8;
-      font-weight: 600;
-    }
-
-    /* Edu-tip Box */
-    .edu-tip {
-      background: rgba(14, 165, 233, 0.1);
-      border-left: 3px solid #0284c7;
-      padding: 6px 10px;
-      font-size: 0.73rem;
-      color: #bae6fd;
-      line-height: 1.35;
-      border-radius: 0 4px 4px 0;
-      margin-top: 2px;
-    }
-
-    /* Area Kode */
-    .code-scroll-area {
-      flex: 1;
-      overflow-y: auto;
-      padding: 10px 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .code-box {
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 6px;
-      overflow: hidden;
-    }
-
-    .code-header {
-      padding: 4px 10px;
-      background: #0f172a;
-      border-bottom: 1px solid #334155;
-      font-size: 0.68rem;
-      font-weight: 600;
-      color: #94a3b8;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    pre {
-      padding: 8px 10px;
-      font-family: Consolas, Monaco, monospace;
-      font-size: 0.75rem;
-      line-height: 1.35;
-      color: #e2e8f0;
-      white-space: pre-wrap;
-    }
-
-    .val-highlight {
-      background: rgba(56, 189, 248, 0.15);
-      color: #38bdf8;
-      padding: 1px 3px;
-      border-radius: 3px;
-      border-bottom: 1px solid #38bdf8;
-      font-weight: bold;
-    }
-
-    /* Panel Kanan (Live Preview) */
-    .preview-panel {
-      width: 50%;
-      background: #f8fafc;
-      color: #0f172a;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .preview-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 16px;
-      background: #e2e8f0;
-      border-bottom: 1px solid #cbd5e1;
-      font-size: 0.72rem;
-      flex-shrink: 0;
-    }
-
-    .preview-badge {
-      background: #0284c7;
-      color: white;
-      font-size: 0.68rem;
-      font-weight: 600;
-      padding: 2px 6px;
-      border-radius: 4px;
-      text-transform: uppercase;
-    }
-
-    /* Scrollable Canvas for Target Preview */
-    .scroll-viewport {
-      flex: 1;
-      overflow-y: auto;
-      overflow-x: hidden;
-      position: relative;
-      background-color: #f1f5f9;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Target Header */
-    #target-header {
-      background-color: #0f172a;
-      color: #ffffff;
-      padding: 14px 20px;
+      padding: 16px 24px;
       text-align: center;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-      transition: all 0.15s ease;
     }
 
-    #target-header h2 {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: #38bdf8;
+    footer {
+      position: sticky;
+      bottom: 0;
+      z-index: 100;
+      background-color: #42b0f5;
+      color: #ffffff;
+      padding: 12px 24px;
+      text-align: center;
+      font-size: 0.85rem;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
     }
 
-    /* Target Main Container */
-    #target-main {
+    main {
       flex: 1;
-      padding: 20px 14px;
+      padding: 24px 16px;
     }
 
-    .target-flex-container {
+    .flex-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 24px;
       justify-content: center;
-      max-width: 1100px;
+      max-width: 1600px;
       margin: 0 auto;
     }
 
-    /* Target Cards */
-    .target-card {
-      flex: 0 1 240px;
+    .card {
+      flex: 0 1 460px;
       background-color: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 8px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-      transition: all 0.15s ease;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
 
-    .target-card img {
+    .card:hover {
+      transform: translateY(-4px) scale(1.03);
+      border-color: rgba(249, 115, 22, 0.4);
+      box-shadow: 0 10px 24px rgba(249, 115, 22, 0.18), 0 0 14px rgba(251, 146, 60, 0.28);
+    }
+
+    .card img {
       width: 100%;
-      height: 160px;
+      height: 300px;
       object-fit: cover;
       display: block;
     }
 
-    .target-card p {
-      padding: 10px 12px;
-      font-size: 0.8rem;
-      line-height: 1.35;
+    .card p {
+      padding: 12px 14px;
+      font-size: 0.85rem;
+      line-height: 1.4;
       color: #475569;
-      flex: 1;
-    }
-
-    /* Target Card Badge (For Relative vs Absolute Education) */
-    .card-badge {
-      background-color: #f59e0b;
-      color: #ffffff;
-      font-size: 0.65rem;
-      font-weight: 700;
-      padding: 3px 7px;
-      border-radius: 4px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.25);
-      transition: all 0.15s ease;
-    }
-
-    /* Target Footer */
-    #target-footer {
-      background-color: #0f172a;
-      color: #94a3b8;
-      padding: 12px 20px;
-      text-align: center;
-      font-size: 0.8rem;
-      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
-      transition: all 0.15s ease;
     }
   </style>
 </head>
 <body>
 
-  <header class="app-header">
-    <h1>Tutorial Interaktif: Positioning CSS (06-latihan)</h1>
-    <p>Eksplorasi mendalam: sticky, fixed, absolute, relative, dan static saat scrolling.</p>
+  <header>
+    <h1>Portfolio Illustrasi karya Nicho)</h1>
   </header>
 
-  <div class="split-layout">
-    <!-- PANEL KIRI (KONTROL & KODE) -->
-    <section class="editor-panel">
-      
-      <div class="controls-section">
-        
-        <!-- BAGIAN 1: HEADER POSITIONING -->
-        <div class="section-title">1. Positioning: &lt;header&gt;</div>
-
-        <!-- header position -->
-        <div class="control-row" style="background: rgba(56, 189, 248, 0.08); padding: 3px 4px; border-radius: 4px;">
-          <span class="control-label" style="color: #38bdf8;">header position</span>
-          <div class="control-inputs">
-            <input type="text" id="input-header-pos" class="manual-input" value="sticky">
-            <div class="btn-group" data-target="header-pos">
-              <button class="active" data-val="sticky">sticky</button>
-              <button data-val="fixed">fixed</button>
-              <button data-val="relative">relative</button>
-              <button data-val="absolute">absolute</button>
-              <button data-val="static">static (normal)</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- header top & z-index -->
-        <div class="control-row">
-          <span class="control-label">header top</span>
-          <div class="control-inputs">
-            <input type="text" id="input-header-top" class="manual-input" value="0px">
-            <div class="btn-group" data-target="header-top">
-              <button class="active" data-val="0px">0px</button>
-              <button data-val="12px">12px</button>
-              <button data-val="auto">auto</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="control-row">
-          <span class="control-label">header z-index</span>
-          <div class="control-inputs">
-            <input type="text" id="input-header-z" class="manual-input" value="100">
-            <div class="btn-group" data-target="header-z">
-              <button class="active" data-val="100">100 (di atas)</button>
-              <button data-val="1">1</button>
-              <button data-val="0">0 (tertutup)</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- BAGIAN 2: FOOTER POSITIONING -->
-        <div class="section-title">2. Positioning: &lt;footer&gt;</div>
-
-        <!-- footer position -->
-        <div class="control-row" style="background: rgba(56, 189, 248, 0.08); padding: 3px 4px; border-radius: 4px;">
-          <span class="control-label" style="color: #38bdf8;">footer position</span>
-          <div class="control-inputs">
-            <input type="text" id="input-footer-pos" class="manual-input" value="sticky">
-            <div class="btn-group" data-target="footer-pos">
-              <button class="active" data-val="sticky">sticky</button>
-              <button data-val="fixed">fixed</button>
-              <button data-val="relative">relative</button>
-              <button data-val="absolute">absolute</button>
-              <button data-val="static">static (normal)</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- footer bottom -->
-        <div class="control-row">
-          <span class="control-label">footer bottom</span>
-          <div class="control-inputs">
-            <input type="text" id="input-footer-bottom" class="manual-input" value="0px">
-            <div class="btn-group" data-target="footer-bottom">
-              <button class="active" data-val="0px">0px</button>
-              <button data-val="12px">12px</button>
-              <button data-val="auto">auto</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- BAGIAN 3: RELATIVE PARENT VS ABSOLUTE CHILD (KASUS BADGE KARTU) -->
-        <div class="section-title">3. Parent vs Child: Induk (.card) & Anak (.badge)</div>
-
-        <!-- card position (Parent) -->
-        <div class="control-row">
-          <span class="control-label">.card position (Induk)</span>
-          <div class="control-inputs">
-            <input type="text" id="input-card-pos" class="manual-input" value="relative">
-            <div class="btn-group" data-target="card-pos">
-              <button class="active" data-val="relative">relative (Jangkar)</button>
-              <button data-val="static">static (Bukan Jangkar!)</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- badge position (Child) -->
-        <div class="control-row">
-          <span class="control-label">.card-badge position (Anak)</span>
-          <div class="control-inputs">
-            <input type="text" id="input-badge-pos" class="manual-input" value="absolute">
-            <div class="btn-group" data-target="badge-pos">
-              <button class="active" data-val="absolute">absolute</button>
-              <button data-val="static">static</button>
-              <button data-val="relative">relative</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="control-row">
-          <span class="control-label">badge offset (top/right)</span>
-          <div class="control-inputs">
-            <input type="text" id="input-badge-offset" class="manual-input" value="8px">
-            <div class="btn-group" data-target="badge-offset">
-              <button class="active" data-val="8px">top: 8px, right: 8px</button>
-              <button data-val="16px">top: 16px, right: 16px</button>
-              <button data-val="0px">top: 0px, right: 0px</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Penjelasan Edukatif Dinamis -->
-        <div id="edu-tip" class="edu-tip">
-          <strong>Perilaku Aktif:</strong> Header & Footer sticky menempel pada batas atas dan bawah saat konten di dalam viewport di-scroll!
-        </div>
-
+  <main>
+    <div class="flex-container">
+      <div class="card">
+        <img src="1.jpg" alt="Karya ilustrasi dibuat untuk lomba didalam server roleplay discord MoonCottage, Yang kemudian menang juara 1 dengan grandprizenya Rp.100.000">
+        <p>Karya ilustrasi saya yang dibuat untuk lomba didalam server roleplay discord "MoonCottage" menggunakan OC 'Iselthar' Owner discord tersebut, Yang kemudian menang juara 1 dengan grandprizenya Rp.100.000</p>
       </div>
 
-      <!-- AREA PREVIEW KODE CSS -->
-      <div class="code-scroll-area">
-        <div class="code-box">
-          <div class="code-header">CSS Terapan (Realtime Update)</div>
-          <pre id="css-preview">
-<span style="color: #f59e0b;">header</span> {
-  position: <span id="css-val-header-pos" class="val-highlight">sticky</span>;
-  top: <span id="css-val-header-top" class="val-highlight">0px</span>;
-  z-index: <span id="css-val-header-z" class="val-highlight">100</span>;
-  width: 100%;
-}
-
-<span style="color: #f59e0b;">footer</span> {
-  position: <span id="css-val-footer-pos" class="val-highlight">sticky</span>;
-  bottom: <span id="css-val-footer-bottom" class="val-highlight">0px</span>;
-  z-index: 100;
-  width: 100%;
-}
-
-<span style="color: #f59e0b;">.card</span> {
-  position: <span id="css-val-card-pos" class="val-highlight">relative</span>; <span style="color: #94a3b8;">/* Menjadi referensi titik koordinat anak */</span>
-}
-
-<span style="color: #f59e0b;">.card-badge</span> {
-  position: <span id="css-val-badge-pos" class="val-highlight">absolute</span>;
-  top: <span id="css-val-badge-top" class="val-highlight">8px</span>;
-  right: <span id="css-val-badge-right" class="val-highlight">8px</span>;
-}</pre>
-        </div>
-
-        <div class="code-box">
-          <div class="code-header">Kaidah Emas Positioning</div>
-          <pre style="font-size: 0.72rem; color: #cbd5e1;">
-1. <b>static</b>: Aliran normal bawaan HTML. Mengabaikan top/bottom/left/right/z-index.
-2. <b>relative</b>: Tetap di aliran normal, bisa digeser koordinat, dan menjadi "jangkar" acuan bagi elemen anak bernilai absolute!
-3. <b>absolute</b>: Keluar dari aliran normal, melayang relatif terhadap elemen leluhur terdekat yang memiliki position (selain static).
-4. <b>fixed</b>: Keluar dari aliran normal, mengunci mati terhadap jendela layar (viewport).
-5. <b>sticky</b>: Seperti relative saat biasa, lalu otomatis "menempel" seperti fixed begitu mencapai ambang batas top/bottom saat di-scroll.</pre>
-        </div>
+      <div class="card">
+        <img src="2.jpg" alt="Ilustrasi original OC saya The Guardian of Bell yang dibuat untuk background Kalender 2027, Memvisualisasikan sebuah suasana painterly dekat dengan air terjun">
+        <p>Ilustrasi original OC saya "The Guardian of Bell" yang dibuat untuk background Kalender 2027, Memvisualisasikan sebuah suasana painterly dekat dengan air terjun.</p>
       </div>
 
-    </section>
-
-    <!-- PANEL KANAN (PREVIEW AKTIF BISA DI-SCROLL) -->
-    <section class="preview-panel">
-      
-      <div class="preview-bar">
-        <span class="preview-badge">Live Scrollable Preview</span>
-        <span style="color: #64748b; font-size: 0.72rem;">&darr; Coba scroll panel ini ke bawah & ke atas &darr;</span>
+      <div class="card">
+        <img src="3.png" alt="Dermaga kayu panjang menjorok ke danau pegunungan berair jernih">
+        <p>Ilustrasi Original Saya menggambarkan sebuah fenomena roleplay yang terjadi didalam private Minecraft SMP server 2025.</p>
       </div>
+    </div>
+  </main>
 
-      <!-- Viewport Scrollable -->
-      <div class="scroll-viewport" id="scroll-area">
-        
-        <!-- TARGET HEADER -->
-        <header id="target-header">
-          <h2>Galeri Foto (Header Navigasi)</h2>
-        </header>
+  <footer>
+    <p>&copy; Karya punya Nicholas Aliputra 223170647</p>
+  </footer>
 
-        <!-- TARGET MAIN DENGAN 12 KARTU -->
-        <main id="target-main">
-          <div class="target-flex-container">
-            
-            <div class="target-card">
-              <span class="card-badge">FOTO 01</span>
-              <img src="images-uniform/uniform-01-800x600.jpg" alt="Seseorang memegang kamera digital retro Fujifilm X100 silver">
-              <p>Seseorang memegang kamera digital retro Fujifilm X100 silver</p>
-            </div>
-
-            <div class="target-card">
-              <span class="card-badge">FOTO 02</span>
-              <img src="images-uniform/uniform-05-800x600.jpg" alt="Depo stasiun perkeretaapian barang saat matahari terbit keemasan">
-              <p>Depo stasiun perkeretaapian barang saat matahari terbit keemasan</p>
-            </div>
-
-            <div class="target-card">
-              <span class="card-badge">FOTO 03</span>
-              <img src="images-uniform/uniform-11-800x600.jpg" alt="Dermaga kayu panjang menjorok ke danau pegunungan berair jernih">
-              <p>Dermaga kayu panjang menjorok ke danau pegunungan berair jernih</p>
-            </div>
-
-            <div class="target-card">
-              <span class="card-badge">FOTO 04</span>
-              <img src="images-uniform/uniform-14-800x600.jpg" alt="Gulungan jerami gandum silinder di ladang pertanian berkabut">
-              <p>Gulungan jerami gandum silinder di ladang pertanian berkabut</p>
-            </div>
-
-            <div class="target-card">
-              <span class="card-badge">FOTO 05</span>
-              <img src="images-uniform/uniform-22-800x600.jpg" alt="Puncak gunung Matterhorn bersalju megah">
-              <p>Puncak gunung Matterhorn bersalju megah</p>
-            </div>
-
-            <div class="target-card">
-              <span class="card-badge">FOTO 06</span>
-              <img src="images-uniform/uniform-26-800x600.jpg" alt="Induk beruang cokelat grizzly berjalan bersama dua anaknya">
-              <p>Induk beruang cokelat grizzly berjalan bersama dua anaknya</p>
-            </div>
-
-            <div class="target-card">
-              <span class="card-badge">FOTO 07</span>
-              <img src="images-uniform/uniform-32-800x600.jpg" alt="Haluan perahu kano kayu dengan dayung bersandar di tepi danau">
-              <p>Haluan perahu kano kayu dengan dayung bersandar di tepi danau</p>
-            </div>
-
-            <div class="target-card">
-              <span class="card-badge">FOTO 08</span>
-              <img src="images-uniform/uniform-42-800x600.jpg" alt="Bintang jatuh meluncur melintasi galaksi Bima Sakti">
-              <p>Bintang jatuh meluncur melintasi galaksi Bima Sakti</p>
-            </div>
-
-            <div class="target-card">
-              <span class="card-badge">FOTO 09</span>
-              <img src="images-uniform/uniform-02-800x600.jpg" alt="Rel kereta api tepi pantai memanjang lurus">
-              <p>Rel kereta api tepi pantai memanjang lurus</p>
-            </div>
-
-            <div class="target-card">
-              <span class="card-badge">FOTO 10</span>
-              <img src="images-uniform/uniform-09-800x600.jpg" alt="Kincir angin turbin listrik di atas perbukitan hijau">
-              <p>Kincir angin turbin listrik di atas perbukitan hijau</p>
-            </div>
-
-            <div class="target-card">
-              <span class="card-badge">FOTO 11</span>
-              <img src="images-uniform/uniform-13-800x600.jpg" alt="Papan selancar tergeletak di pasir pantai saat sunset">
-              <p>Papan selancar tergeletak di pasir pantai saat sunset</p>
-            </div>
-
-            <div class="target-card">
-              <span class="card-badge">FOTO 12</span>
-              <img src="images-uniform/uniform-36-800x600.jpg" alt="Pemandian air panas Blue Lagoon Islandia dengan uap mengepul">
-              <p>Pemandian air panas Blue Lagoon Islandia dengan uap mengepul</p>
-            </div>
-
-          </div>
-        </main>
-
-        <!-- TARGET FOOTER -->
-        <footer id="target-footer">
-          <p>&copy; Latihan Layout Web - Eksplorasi Sticky & Absolute Positioning</p>
-        </footer>
-
-      </div>
-
-    </section>
-  </div>
-
-  <script>
-    // State Aplikasi
-    const state = {
-      headerPos: 'sticky',
-      headerTop: '0px',
-      headerZ: '100',
-      footerPos: 'sticky',
-      footerBottom: '0px',
-      cardPos: 'relative',
-      badgePos: 'absolute',
-      badgeOffset: '8px'
-    };
-
-    // Elemen Target
-    const targetHeader = document.getElementById('target-header');
-    const targetFooter = document.getElementById('target-footer');
-    const targetCards = document.querySelectorAll('.target-card');
-    const targetBadges = document.querySelectorAll('.card-badge');
-    const eduTip = document.getElementById('edu-tip');
-
-    function applyStyles() {
-      // 1. Terapkan pada Header
-      targetHeader.style.position = state.headerPos;
-      targetHeader.style.top = state.headerTop === 'auto' ? '' : state.headerTop;
-      targetHeader.style.zIndex = state.headerZ;
-      if (state.headerPos === 'fixed') {
-        targetHeader.style.width = '100%';
-        targetHeader.style.left = '0';
-      } else {
-        targetHeader.style.width = '';
-        targetHeader.style.left = '';
-      }
-
-      // 2. Terapkan pada Footer
-      targetFooter.style.position = state.footerPos;
-      targetFooter.style.bottom = state.footerBottom === 'auto' ? '' : state.footerBottom;
-      if (state.footerPos === 'fixed') {
-        targetFooter.style.width = '100%';
-        targetFooter.style.left = '0';
-      } else {
-        targetFooter.style.width = '';
-        targetFooter.style.left = '';
-      }
-
-      // 3. Terapkan pada Cards (Parent)
-      targetCards.forEach(card => {
-        card.style.position = state.cardPos;
-      });
-
-      // 4. Terapkan pada Badges (Child)
-      targetBadges.forEach(badge => {
-        badge.style.position = state.badgePos;
-        if (state.badgePos === 'absolute') {
-          badge.style.top = state.badgeOffset;
-          badge.style.right = state.badgeOffset;
-        } else if (state.badgePos === 'relative') {
-          badge.style.top = state.badgeOffset;
-          badge.style.right = '';
-        } else {
-          badge.style.top = '';
-          badge.style.right = '';
-        }
-      });
-
-      // 5. Update Nilai Teks di Panel Kode CSS
-      document.getElementById('css-val-header-pos').textContent = state.headerPos;
-      document.getElementById('css-val-header-top').textContent = state.headerTop;
-      document.getElementById('css-val-header-z').textContent = state.headerZ;
-      document.getElementById('css-val-footer-pos').textContent = state.footerPos;
-      document.getElementById('css-val-footer-bottom').textContent = state.footerBottom;
-      document.getElementById('css-val-card-pos').textContent = state.cardPos;
-      document.getElementById('css-val-badge-pos').textContent = state.badgePos;
-      document.getElementById('css-val-badge-top').textContent = state.badgeOffset;
-      document.getElementById('css-val-badge-right').textContent = state.badgeOffset;
-
-      // 6. Update Penjelasan Edukatif Dinamis
-      updateEduTip();
-    }
-
-    function updateEduTip() {
-      let tip = '';
-      if (state.headerPos === 'sticky') {
-        tip = '<strong>Header Sticky:</strong> Bergerak normal di posisinya, lalu otomatis "mengunci" di atas begitu batas scroll <code>top: 0</code> tersentuh!';
-      } else if (state.headerPos === 'fixed') {
-        tip = '<strong>Header Fixed:</strong> Dicabut dari aliran dokumen, selalu terkunci diam di puncak viewport, mengambang di atas konten.';
-      } else if (state.headerPos === 'static') {
-        tip = '<strong>Header Static:</strong> Posisi bawaan HTML biasa. Saat halaman di-scroll ke bawah, header akan ikut hanyut hilang ke atas.';
-      } else if (state.headerPos === 'relative') {
-        tip = '<strong>Header Relative:</strong> Berada di aliran normal dan ikut hanyut saat scroll, hanya tergeser offset koordinatnya jika diberi top.';
-      } else if (state.headerPos === 'absolute') {
-        tip = '<strong>Header Absolute:</strong> Dicabut dari aliran dokumen dan menempel pada kontainer terdekat.';
-      }
-
-      if (state.badgePos === 'absolute') {
-        if (state.cardPos === 'relative') {
-          tip += '<br><strong style="color: #86efac;">Induk Relatif & Anak Absolut:</strong> Bagus! Karena .card berposisi <code>relative</code>, badge terkunci rapi di sudut setiap kartu masing-masing.';
-        } else {
-          tip += '<br><strong style="color: #f87171;">PERHATIAN (Induk Static):</strong> Karena .card berposisi <code>static</code>, badge tidak memiliki jangkar pada kartu dan akan "kabur" keluar mengacu ke viewport luar!';
-        }
-      }
-
-      eduTip.innerHTML = tip;
-    }
-
-    // Hubungkan kontrol input teks manual dan tombol preset
-    const controls = [
-      { key: 'header-pos', inputId: 'input-header-pos', stateProp: 'headerPos' },
-      { key: 'header-top', inputId: 'input-header-top', stateProp: 'headerTop' },
-      { key: 'header-z', inputId: 'input-header-z', stateProp: 'headerZ' },
-      { key: 'footer-pos', inputId: 'input-footer-pos', stateProp: 'footerPos' },
-      { key: 'footer-bottom', inputId: 'input-footer-bottom', stateProp: 'footerBottom' },
-      { key: 'card-pos', inputId: 'input-card-pos', stateProp: 'cardPos' },
-      { key: 'badge-pos', inputId: 'input-badge-pos', stateProp: 'badgePos' },
-      { key: 'badge-offset', inputId: 'input-badge-offset', stateProp: 'badgeOffset' }
-    ];
-
-    controls.forEach(({ key, inputId, stateProp }) => {
-      const inputEl = document.getElementById(inputId);
-      const btnGroup = document.querySelector(`.btn-group[data-target="${key}"]`);
-
-      // Ketik manual pada input
-      inputEl.addEventListener('input', (e) => {
-        const val = e.target.value.trim();
-        state[stateProp] = val;
-
-        if (btnGroup) {
-          const btns = btnGroup.querySelectorAll('button');
-          btns.forEach(btn => {
-            if (btn.getAttribute('data-val') === val) {
-              btn.classList.add('active');
-            } else {
-              btn.classList.remove('active');
-            }
-          });
-        }
-        applyStyles();
-      });
-
-      // Klik tombol preset
-      if (btnGroup) {
-        const btns = btnGroup.querySelectorAll('button');
-        btns.forEach(btn => {
-          btn.addEventListener('click', () => {
-            btns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const val = btn.getAttribute('data-val');
-            inputEl.value = val;
-            state[stateProp] = val;
-            applyStyles();
-          });
-        });
-      }
-    });
-
-    // Inisialisasi awal
-    applyStyles();
-  </script>
 </body>
 </html>
